@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Product from "./Product";
-import { updateTotal } from '../slices/basketSlice';
+import { updateTotal } from '../slices/basketSlice'; 
 function BasketProduct() {
   const { products, ammount, total } = useSelector((store) => store.basket);
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function BasketProduct() {
           )}
           <div className='flex items-center justify-around '>
             <div className='flex gap-14'>
-            <h1 className='text-2xl font-medium'>Total: <span></span> </h1>
+            <h1 className='text-2xl font-medium'>Total:  </h1>
             <p className='text-2xl font-medium'> ${total} </p>
             </div>
             

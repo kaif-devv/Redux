@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { addAmmount, removeAmmount, removeItem } from "../slices/basketSlice"
 function Product({ name, price, image, ammount }) {
   const dispatch = useDispatch();
-
   return (
     <div className='flex flex-row items-center  px-20 my-10 justify-around'>
       <img src={image} className='w-40' />

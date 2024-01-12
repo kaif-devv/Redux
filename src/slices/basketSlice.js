@@ -5,7 +5,7 @@ const initialState = {
     ammount: 0,
     total: 0
 }
-export const basketStyle = createSlice({
+export const basketSlice = createSlice({
     name: "basketSlice",
     initialState,
     reducers: {
@@ -21,18 +21,18 @@ export const basketStyle = createSlice({
             state.products = state.products.filter(item => item.name !== payload.name)
         },
         updateTotal: (state) => {
-            let ammount = 0;
-            let total = 0;
+            let a = 0;
+            let t = 0;
             state.products.forEach(item => {
-                ammount = ammount + item.ammount;
-                total = total + item.ammount * item.price;
+                a = a + item.ammount;
+                t = t + item.ammount * item.price;
             });
-            state.ammount = ammount;
-            state.total = total;
+            state.ammount = a;
+            state.total = t;
 
         }
 
     }
 })
-export const { addAmmount, removeAmmount, removeItem ,updateTotal} = basketStyle.actions;
-export default basketStyle.reducer;
+export const { addAmmount, removeAmmount, removeItem ,updateTotal} = basketSlice.actions;
+export default basketSlice.reducer;
