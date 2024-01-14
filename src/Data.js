@@ -22,5 +22,5 @@ export const storeData = [
         ammount: 1,
         id: 3
 
-    },
+    }
 ]
