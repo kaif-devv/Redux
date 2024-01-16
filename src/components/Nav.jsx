@@ -1,14 +1,18 @@
-
 import React from 'react'
 import { useSelector } from 'react-redux';
 import Error from './Error';
 import AddProduct from './AddProduct';
+import { useNavigate } from 'react-router-dom';
 
 function Nav() {
   const count = useSelector((store) => store.basket.ammount);
-  function handle(){
-    window.location.href = "/Redux/AddProduct"
+  const navigate = useNavigate(); // Moved useNavigate to the top level
+  
+  function use(e){
+    e.preventDefault();
+    navigate('/Redux/AddProduct') // Changed navigate.push to navigate
   }
+
   return (
     <>
       <div className="px-14 flex justify-between text-2xl font-semibold">
@@ -21,12 +25,10 @@ function Nav() {
         </div>
       </div>
       <div >
-      <button onClick={handle} className= "cursor-pointer  group relative left-14 top-5 flex gap-1.5 px-4 py-2 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md">
+      <button onClick={use} className= "cursor-pointer  group relative left-14 top-5 flex gap-1.5 px-4 py-2 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md">
               ADD
             </button>
       </div>
-
-
     </>
   )
 }

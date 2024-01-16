@@ -1,4 +1,4 @@
-export const storeData = [
+export var storeData = [
     {
         name: "Denver",
         price: 500,
@@ -23,4 +23,5 @@ export const storeData = [
         id: 3
 
     }
+    
 ]

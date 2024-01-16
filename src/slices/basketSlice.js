@@ -32,8 +32,16 @@ export const basketSlice = createSlice({
 
         },
         addProduct: (state, action) => {
-            state.products = state.products.unshift(action.payload);
-        }
+            state.products = [...state.products, action.payload];
+            storeData = [...state ,state.products];
+            return {
+                products: storeData
+            }
+           
+        },
+        
+
+
     }
 })
 export const { addAmmount, removeAmmount, removeItem, updateTotal, addProduct } = basketSlice.actions;

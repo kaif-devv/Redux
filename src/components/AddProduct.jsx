@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../slices/basketSlice';
+import { useNavigate } from 'react-router-dom';
 function AddProduct() {
   const dispatch=useDispatch();
     const [fname, setFname] = useState('');
@@ -8,21 +9,29 @@ function AddProduct() {
     const [fimage, setFimage] = useState('');
     const [fammount, setFammount] = useState('');
 
+    const navigate = useNavigate();
+    const temp = (e) => {
+      e.preventDefault();
+      // Use history.push instead of window.location.href
+      navigate('/Redux');
+    };
+
+
     function handleSubmit(e) {
         try {
             e.preventDefault();
-            const fproducts = {
-                name: fname ,
-                price: fprice,
-                image: fimage,
-                ammount: fammount,
-            }
-            dispatch(addProduct(fproducts));
-            setFname('');
-            setFprice('');
-            setFimage('');
-            setFammount('');
-            console.log(fproducts)
+            // const fproducts = 
+            dispatch(addProduct({
+                name: `${fname}`,
+                price: `${fprice}`,
+                image: `${fimage}`,
+                ammount: `${fammount}`,
+            }));
+            // setFname('');
+            // setFprice('');
+            // setFimage('');
+            // setFammount('');
+            console.log(fname);
 
         } catch (error) {
             console.log(error)
@@ -47,6 +56,7 @@ function AddProduct() {
                 </div>
                 <button onSubmit={handleSubmit} type="submit" className="text-gray-200 bg-blue-200 hover:bg-blue-800 hover:text-black focus:ring-2 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-white  dark:focus:ring-black">Add the Product</button>
             </form>
+            <button onClick={temp} >SUBMITTTTTTTTT</button>
         </>
     )
 }
