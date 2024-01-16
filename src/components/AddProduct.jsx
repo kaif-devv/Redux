@@ -39,9 +39,8 @@ function AddProduct() {
     }
     return (
         <>  
-        <div>
-        <button className='cursor-pointer group relative flex m-10 px-4 py-4 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md' onClick={temp} >Back to Home</button>
-
+        <div className='pt-11 flex items-center justify-center mr-96 pr-10'>
+        <button className='cursor-pointer group relative  px-4 py-4 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md' onClick={temp} >Back to Home</button>
         </div>
             <h1 className='mt-20 mb-5 flex justify-center items-center text-2xl font-semibold'>Enter the Product Details</h1>
             <form onSubmit={handleSubmit} className=" flex flex-col gap-5  max-w-sm mx-auto">
