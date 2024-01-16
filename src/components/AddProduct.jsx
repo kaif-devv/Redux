@@ -38,7 +38,11 @@ function AddProduct() {
        
     }
     return (
-        <>
+        <>  
+        <div>
+        <button className='cursor-pointer group relative flex m-10 px-4 py-4 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md' onClick={temp} >Back to Home</button>
+
+        </div>
             <h1 className='mt-20 mb-5 flex justify-center items-center text-2xl font-semibold'>Enter the Product Details</h1>
             <form onSubmit={handleSubmit} className=" flex flex-col gap-5  max-w-sm mx-auto">
                 <div className="mb-5">
@@ -55,7 +59,6 @@ function AddProduct() {
                 </div>
                 <button onSubmit={handleSubmit} type="submit" className="text-gray-200 bg-blue-200 hover:bg-blue-800 hover:text-black focus:ring-2 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-white  dark:focus:ring-black">Add the Product</button>
             </form>
-            <button onClick={temp} >Back to Home</button>
         </>
     )
 }
