@@ -30,8 +30,6 @@ function AddProduct() {
             setFprice('');
             setFimage('');
             setFammount('');
-            console.log(fname);
-
         } catch (error) {
             console.log(error)
         }
