@@ -22,15 +22,15 @@ function AddProduct() {
             e.preventDefault();
             // const fproducts = 
             dispatch(addProduct({
-                name: `${fname}`,
-                price: `${fprice}`,
-                image: `${fimage}`,
-                ammount: `${fammount}`,
+                name: fname,
+                price: fprice,
+                image: fimage,
+                ammount: fammount,
             }));
-            // setFname('');
-            // setFprice('');
-            // setFimage('');
-            // setFammount('');
+            setFname('');
+            setFprice('');
+            setFimage('');
+            setFammount('');
             console.log(fname);
 
         } catch (error) {

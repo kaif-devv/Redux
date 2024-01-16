@@ -32,11 +32,7 @@ export const basketSlice = createSlice({
 
         },
         addProduct: (state, action) => {
-            state.products = [...state.products, action.payload];
-            storeData = [...state ,state.products];
-            return {
-                products: storeData
-            }
+            state.products.push(action.payload)
            
         },
         
