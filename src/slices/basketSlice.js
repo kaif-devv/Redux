@@ -20,6 +20,10 @@ export const basketSlice = createSlice({
         removeItem: (state, { payload }) => {
             state.products = state.products.filter(item => item.name !== payload.name)
         },
+        addProduct: (state, action) => {
+            state.products.push(action.payload)
+           
+        },
         updateTotal: (state) => {
             let a = 0;
             let t = 0;
@@ -31,10 +35,7 @@ export const basketSlice = createSlice({
             state.total = t;
 
         },
-        addProduct: (state, action) => {
-            state.products.push(action.payload)
-           
-        },
+       
         
 
 

@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
     <Router>
       <Routes>
-        <Route path="/Redux" exact element={<App/>} />
+        <Route path="/Redux/" exact element={<App/>} />
         <Route path="/Redux/Error" element={<Error/>} />
         <Route path="/Redux/AddProduct" element={<AddProduct/>} />
       </Routes>
