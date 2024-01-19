@@ -7,13 +7,16 @@ import './index.css'
 import { store }from './redux-store/store.js'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import Signup from './components/Signup.jsx'
+import Login from './components/Login.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
     <Router>
       <Routes>
         <Route path="/Redux/" exact element={<App/>} />
+        <Route path="/Redux/signup" exact element={<Signup/>} />
+        <Route path="/Redux/login" exact element={<Login/>} />
         <Route path="/Redux/Error" element={<Error/>} />
         <Route path="/Redux/AddProduct" element={<AddProduct/>} />
       </Routes>

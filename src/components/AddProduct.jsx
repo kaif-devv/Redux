@@ -12,7 +12,6 @@ function AddProduct() {
     const [fprice, setFprice] = useState('');
     const [fimage, setFimage] = useState('');
     const [fammount, setFammount] = useState('');
-    const[id, setId] = useState('')
     const navigate = useNavigate();
     const temp = (e) => {
         e.preventDefault();
