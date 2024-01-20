@@ -6,11 +6,11 @@ import Error from './Error';
 function BasketProduct() {
   const { products, ammount, total } = useSelector((store) => store.basket);
   const dispatch = useDispatch();
-  
   useEffect(() => {
     dispatch(updateTotal())
   }, [products, dispatch]);
-
+  const isLoading = useSelector((state) => state.basket.isLoading);
+  if (isLoading) return <h1>Loading...</h1>
   return (
     <div>
       {ammount >= 1 ? (<>
