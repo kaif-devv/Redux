@@ -9,9 +9,9 @@ function AddProduct() {
 
     const dispatch = useDispatch();
     const [fname, setFname] = useState('');
-    const [fprice, setFprice] = useState('');
+    const [fprice, setFprice] = useState(null);
     const [fimage, setFimage] = useState('');
-    const [fammount, setFammount] = useState('');
+    const [fammount, setFammount] = useState(null);
     const navigate = useNavigate();
     const temp = (e) => {
         e.preventDefault();
@@ -26,7 +26,7 @@ function AddProduct() {
                 price: fprice,
                 image: fimage,
                 ammount: fammount,
-                id: newId+1.
+                id: newId+1
             }));
             setFname('');
             setFprice('');
@@ -48,13 +48,13 @@ function AddProduct() {
                     <input type="text" onChange={e => setFname(e.target.value)} id="fname" value={fname} className=" shadow-sm bg-gray-50 border border-gray-300 text-black-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter Item Name" />
                 </div>
                 <div className="mb-5">
-                    <input type="number" onChange={e => setFprice(e.target.value)} id="fprice" value={fprice} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Price" />
+                    <input type="number" onChange={e => setFprice(Number(e.target.value))} id="fprice" value={fprice} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Price" />
                 </div>
                 <div className="mb-5">
                     <input type="url" id="fimage" onChange={e => setFimage(e.target.value)} value={fimage} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter Item Url" />
                 </div>
                 <div className="mb-5">
-                    <input type="number" id="fammount" onChange={e => setFammount(e.target.value)} value={fammount} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter No of Items" />
+                    <input type="number" id="fammount" onChange={e => setFammount(Number(e.target.value))} value={fammount} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter No of Items" />
                 </div>
                 <button onSubmit={handleSubmit} type="submit" className="text-gray-200 bg-blue-200 hover:bg-blue-800 hover:text-black focus:ring-2 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-white  dark:focus:ring-black">Add the Product</button>
             </form>

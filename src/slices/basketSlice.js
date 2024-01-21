@@ -30,8 +30,8 @@ export const basketSlice = createSlice({
             let a = 0;
             let t = 0;
             state.products.forEach(item => {
-                a = a + item.ammount;
-                t = t + item.ammount * item.price;
+                a = a + (item.ammount);
+                t = t + (item.ammount * item.price);
             });
             state.ammount = a;
             state.total = t;
