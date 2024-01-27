@@ -11,7 +11,6 @@ import { account } from '../appwrite/appwriteConfig';
 function Nav() {
   const dispatch = useDispatch();
   const count = useSelector((store) => store.basket.ammount);
-  const authentication = useSelector((store) => store.basket.auth);
   const navigate = useNavigate(); // Moved useNavigate to the top level
   const [name, setName] = React.useState('');
 useEffect(() => {
