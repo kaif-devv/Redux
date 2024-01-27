@@ -9,12 +9,11 @@ function BasketProduct() {
   useEffect(() => {
     dispatch(updateTotal())
   }, [products, dispatch]);
-  const isLoading = useSelector((state) => state.basket.isLoading);
-  if (isLoading) return <h1>Loading...</h1>
+
   return (
     <div>
       {ammount >= 1 ? (<>
-        <div>
+        <div> 
           {products.map((item, i) => <Product
             key={item.id}
             name={item.name}

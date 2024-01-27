@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signup from './components/Signup.jsx'
 import Login from './components/Login.jsx';
-// import PrivateRoutes from './appwrite/privateRoutes.jsx'
+import PrivateRoutes from './appwrite/privateRoutes.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -18,11 +18,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/Redux/signup" exact element={<Signup />} />
           <Route path="/Redux/login" exact element={<Login />} />
-          {/* <Route path="/Redux" element={<PrivateRoutes />} > */}
+          <Route path="/Redux" element={<PrivateRoutes />} >
             <Route path="/Redux/" exact element={<App />} />
             <Route path="/Redux/Error" element={<Error />} />
             <Route path="/Redux/AddProduct" element={<AddProduct />} />
-          {/* </Route> */}
+          </Route>
         </Routes>
       </Router>
     </Provider>

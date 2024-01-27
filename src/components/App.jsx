@@ -13,11 +13,9 @@ function App() {
   };
 // this code prevents user from going back to login page by pressing back button
 
-  const dispatch = useDispatch();
-  const { products } = useSelector((store) => store.basket);
   const navigate = useNavigate();
   const isLoading = useSelector((store) => store.basket.isLoading);
-
+  
   useEffect(() => {
     if (isLoading) {
       navigate('/Redux/login');
