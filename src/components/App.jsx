@@ -6,6 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 function App() {
+// this code prevents user from going back to login page by pressing back button
+  window.history.pushState(null, null, window.location.href);
+  window.onpopstate = function () {
+    window.history.go(1);
+  };
+// this code prevents user from going back to login page by pressing back button
+
   const dispatch = useDispatch();
   const { products } = useSelector((store) => store.basket);
   const navigate = useNavigate();
@@ -19,7 +26,7 @@ function App() {
   if (isLoading) {
     return <h1 className='flex w-screen h-screen text-3xl justify-center align-middle'>Loading...</h1>;
   }
-  
+
   return (
     <>
       <div className="mt-5">

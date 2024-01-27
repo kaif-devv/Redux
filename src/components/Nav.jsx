@@ -14,19 +14,14 @@ function Nav() {
   const authentication = useSelector((store) => store.basket.auth);
   const navigate = useNavigate(); // Moved useNavigate to the top level
   const [name, setName] = React.useState('');
+useEffect(() => {
   const infopromise = account.get();
   infopromise.then((response) => {
-    console.log(response);
     setName(response.name);
   });
+}, []);
 
 
-
-  useEffect(() => {
-    if (!authentication) {
-      navigate('/Redux/login');
-    }
-  }, [authentication, navigate]);
 
 
   function handleLogout() {
@@ -48,7 +43,8 @@ function Nav() {
     <>
       <div className="px-14 flex justify-between text-2xl font-semibold">
         <h1>HOME</h1>
-       <p className='text-xl'>Hello &nbsp; {name.slice(0,1).toUpperCase()}{name.slice(1).toLocaleLowerCase()}</p>
+        { name? <p className='text-xl'>Hello &nbsp; {name.slice(0,1).toUpperCase()}{name.slice(1).toLocaleLowerCase()}</p>:<h1 className='text-xl opacity-15'>loading</h1>}
+       
         <div>
           <div >
             <img className='h-10 w-10' src='https://cdn.iconscout.com/icon/free/png-512/free-cart-393-460366.png?f=webp&w=256' />
