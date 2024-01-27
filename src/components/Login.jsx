@@ -15,8 +15,9 @@ function Login() {
         account.createEmailSession(Lemail, Lpassword).then((response) => {
             console.log(response);
             if (response.$id) {
-            dispatch(login());
-            navigate('/Redux');
+                dispatch(login());
+                navigate('/Redux');
+
             }
         })
     }

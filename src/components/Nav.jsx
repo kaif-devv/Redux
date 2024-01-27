@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Error from './Error';
 import AddProduct from './AddProduct';
 import { useNavigate } from 'react-router-dom';
+import { account } from '../appwrite/appwriteConfig';
 
 
 function Nav() {
@@ -12,12 +13,21 @@ function Nav() {
   const count = useSelector((store) => store.basket.ammount);
   const authentication = useSelector((store) => store.basket.auth);
   const navigate = useNavigate(); // Moved useNavigate to the top level
+  const [name, setName] = React.useState('');
+  const infopromise = account.get();
+  infopromise.then((response) => {
+    console.log(response);
+    setName(response.name);
+  });
+
+
 
   useEffect(() => {
     if (!authentication) {
       navigate('/Redux/login');
     }
   }, [authentication, navigate]);
+
 
   function handleLogout() {
     try {
@@ -38,6 +48,7 @@ function Nav() {
     <>
       <div className="px-14 flex justify-between text-2xl font-semibold">
         <h1>HOME</h1>
+       <p className='text-xl'>Hello &nbsp; {name.slice(0,1).toUpperCase()}{name.slice(1).toLocaleLowerCase()}</p>
         <div>
           <div >
             <img className='h-10 w-10' src='https://cdn.iconscout.com/icon/free/png-512/free-cart-393-460366.png?f=webp&w=256' />

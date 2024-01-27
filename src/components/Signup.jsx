@@ -4,6 +4,7 @@ import { account } from '../appwrite/appwriteConfig';
 import { useNavigate } from 'react-router-dom';
 function Signup() {
     const navigate = useNavigate();
+    const [Runame, setRuname] = useState('');
     const [Rname, setRname] = useState('');
     const [Remail, setRemail] = useState('');
     const [Rpassword, setRpassword] = useState('');
@@ -12,7 +13,7 @@ function Signup() {
         e.preventDefault();
         console.log('handleSignup called');
         try {
-            const response = await account.create(Rname,Remail,Rpassword,);
+            const response = await account.create(Runame,Remail,Rpassword,Rname);
             console.log('Signup response:', response);
             if(response.$id) navigate('/Redux/login');
         } catch (error) {
@@ -29,9 +30,15 @@ function Signup() {
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" onSubmit={handleSignup}>
                         <div>
-                            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
                             <div className="mt-2 ">
                                 <input id="name" value={Rname} onChange={(e) => setRname(e.target.value)} name="name" type="text" autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                            <div className="mt-2 ">
+                                <input id="username" value={Runame} onChange={(e) => setRuname(e.target.value)} name="name" type="text" autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
                         <div>
