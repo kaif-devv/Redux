@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { account } from '../appwrite/appwriteConfig';
 import { useNavigate } from 'react-router-dom';
 function Signup() {
@@ -8,30 +8,46 @@ function Signup() {
     const [Rname, setRname] = useState('');
     const [Remail, setRemail] = useState('');
     const [Rpassword, setRpassword] = useState('');
+    const [error, setError] = useState('');
+    // this useEffect will run when error state changes and will set a timer to clear the error state after 8 seconds
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => {
+                setError(null);
+            }, 8000);
 
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
+    // this function will handle the signup process and will navigate to login page if the signup is successful
     async function handleSignup(e) {
         e.preventDefault();
         console.log('handleSignup called');
         try {
-            const response = await account.create(Runame,Remail,Rpassword,Rname);
+            const response = await account.create(Runame, Remail, Rpassword, Rname);
             console.log('Signup response:', response);
-            if(response.$id) navigate('/Redux/login');
+            if (response.$id) navigate('/Redux/login');
         } catch (error) {
             console.log('Signup error:', error);
+            setError(error.message);
         }
     }
     return (
         <>
             <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up for a new account</h2>
+                <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col justify-center items-center" >
+                    {error ? <div
+                        class="relative block h-auto w-auto p-3.5 mb-0 text-base leading-5 text-white bg-red-500 rounded-3xl overflow-hidden whitespace-nowrap overflow-ellipsis opacity-100">
+                       {error}
+                    </div> : null}
+                    <h2 className="mt-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up for a new account</h2>
                 </div>
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" onSubmit={handleSignup}>
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
                             <div className="mt-2 ">
-                                <input id="name" value={Rname} onChange={(e) => setRname(e.target.value)}  name="name" type="text" autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input id="name" value={Rname} onChange={(e) => setRname(e.target.value)} name="name" type="text" autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
                         <div>
