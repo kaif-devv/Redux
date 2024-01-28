@@ -2,26 +2,20 @@ import React from 'react'
 import { logout } from '../slices/basketSlice';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Error from './Error';
-import AddProduct from './AddProduct';
 import { useNavigate } from 'react-router-dom';
 import { account } from '../appwrite/appwriteConfig';
-
 
 function Nav() {
   const dispatch = useDispatch();
   const count = useSelector((store) => store.basket.ammount);
   const navigate = useNavigate(); // Moved useNavigate to the top level
   const [name, setName] = React.useState('');
-useEffect(() => {
-  const infopromise = account.get();
-  infopromise.then((response) => {
-    setName(response.name);
-  });
-}, []);
-
-
-
+  useEffect(() => {
+    const infopromise = account.get();
+    infopromise.then((response) => {
+      setName(response.name);
+    });
+  }, []);
 
   function handleLogout() {
     try {
@@ -30,7 +24,6 @@ useEffect(() => {
     } catch (error) {
       console.log(error);
     }
-
   }
 
   function use(e) {
@@ -42,8 +35,7 @@ useEffect(() => {
     <>
       <div className="px-14 flex justify-between text-2xl font-semibold">
         <h1>HOME</h1>
-        { name? <p className='text-xl'>Hello &nbsp; {name.slice(0,1).toUpperCase()}{name.slice(1).toLocaleLowerCase()}</p>:<h1 className='text-xl opacity-15'>loading</h1>}
-       
+        {name ? <p className='text-xl'>Hello  {name.slice(0, 1).toUpperCase()}{name.slice(1).toLocaleLowerCase()}</p> : <h1 className='text-xl opacity-15'>loading</h1>}
         <div>
           <div >
             <img className='h-10 w-10' src='https://cdn.iconscout.com/icon/free/png-512/free-cart-393-460366.png?f=webp&w=256' />
@@ -60,7 +52,6 @@ useEffect(() => {
         <button onClick={handleLogout} className="cursor-pointer  group relative left-14 top-5 flex gap-1.5 px-4 py-2 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md">
           Logout
         </button>
-
       </div>
     </>
   )

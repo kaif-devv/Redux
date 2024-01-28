@@ -18,9 +18,8 @@ function PrivateRoutes() {
     </>
     )
   }
-    else {
-        navigate('/Redux/login');
-    }
+   return  navigate('/Redux/login');
+    
 }
 export default PrivateRoutes;
 

@@ -5,37 +5,44 @@ import { account } from '../appwrite/appwriteConfig';
 import { useDispatch } from 'react-redux';
 import { login } from '../slices/basketSlice';
 function Login() {
-    // useEffect(() => {
-    //     const token = account.get()
-    //         .then((response) => {
-    //             console.log(response);
-                
-    //         })
-    //         if(response.$id){ navigate('/Redux/login');};
-    // }, []);
-
-
     const [Lemail, setLemail] = useState('');
     const [Lpassword, setLpassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [error, setError] = useState('');
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => {
+                setError(null);
+            }, 6000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
     function handleLogin(e) {
         e.preventDefault();
-        console.log(Lemail, Lpassword);
         account.createEmailSession(Lemail, Lpassword).then((response) => {
-            console.log(response);
             if (response.$id) {
                 dispatch(login());
                 navigate('/Redux');
-
             }
         })
+            .catch((error) => {
+                console.log(error);
+                setError(error.message);
+            });
     }
+
     return (
         <>
             <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+                <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col justify-center items-center">
+                  {error ?   <div
+                        class="relative block h-auto w-auto  p-4 mb-4 text-base leading-5 text-white bg-red-500 rounded-xl opacity-100 font-regular">
+                        {error}
+                    </div> : null}
+                   
+                    <h2 className="mt-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
