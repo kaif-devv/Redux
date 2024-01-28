@@ -2,25 +2,34 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../slices/basketSlice';
 import { useNavigate } from 'react-router-dom';
-function AddProduct() {
 
+function AddProduct() {
+    // Get the products from the Redux store
     const products = useSelector((state) => state.basket.products);
+    // Get the ID of the last product in the array
     const newId= products[products.length-1].id;
 
+    // Hooks for dispatching actions and navigation
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // State variables for the form inputs
     const [fname, setFname] = useState('');
     const [fprice, setFprice] = useState(null);
     const [fimage, setFimage] = useState('');
     const [fammount, setFammount] = useState(null);
-    const navigate = useNavigate();
+
+    // Function to navigate to the '/Redux' route
     const temp = (e) => {
         e.preventDefault();
-        // Use history.push instead of window.location.href
         navigate('/Redux');
     };
+
+    // Function to handle the form submission
     function handleSubmit(e) {
         try {
             e.preventDefault();
+            // Dispatch the addProduct action with the form inputs as payload
             dispatch(addProduct({
                 name: fname,
                 price: fprice,
@@ -28,10 +37,12 @@ function AddProduct() {
                 ammount: fammount,
                 id: newId+1
             }));
+            // Reset the form inputs
             setFname('');
             setFprice('');
             setFimage('');
             setFammount('');
+            // Navigate to the '/Redux' route
             temp(e);
         } catch (error) {
             console.log(error)

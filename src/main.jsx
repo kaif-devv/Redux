@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/Redux/signup" exact element={<Signup />} />
           <Route path="/Redux/login" exact element={<Login />} />
           <Route path="/Redux" element={<PrivateRoutes />} >
+             {/* Moved the routes inside the private routes  */}
             <Route path="/Redux/" exact element={<App />} />
             <Route path="/Redux/Error" element={<Error />} />
             <Route path="/Redux/AddProduct" element={<AddProduct />} />

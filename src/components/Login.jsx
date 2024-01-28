@@ -10,15 +10,17 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [error, setError] = useState('');
+    // this useEffect will run when error state changes and will set a timer to clear the error state after 8 seconds
     useEffect(() => {
         if (error) {
             const timer = setTimeout(() => {
                 setError(null);
-            }, 6000);
+            }, 8000);
 
             return () => clearTimeout(timer);
         }
     }, [error]);
+    // this function will handle the login process and will dispatch the login action if the login is successful
     function handleLogin(e) {
         e.preventDefault();
         account.createEmailSession(Lemail, Lpassword).then((response) => {
@@ -37,6 +39,7 @@ function Login() {
         <>
             <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col justify-center items-center">
+                    {/* this div will only show if error state is not null */}
                   {error ?   <div
                         class="relative block h-auto w-auto  p-4 mb-4 text-base leading-5 text-white bg-red-500 rounded-xl opacity-100 font-regular">
                         {error}
