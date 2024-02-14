@@ -1,18 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Product from "./Product";
 import { updateTotal } from '../slices/basketSlice';
 import Error from './Error';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { database } from '../appwrite/appwriteConfig';
 function BasketProduct() {
   const navigate = useNavigate();
-  const { products, ammount, total } = useSelector((store) => store.basket);
+  const {products, ammount, total } = useSelector((store) => store.basket);
   const dispatch = useDispatch();
+  const [data, setData] = useState([]);
   // this useEffect will update the total price of the products in the basket
+
+  // function to handle the checkout button
+  useEffect(() => {
+    const promise = database.listDocuments(
+      '65cb5293dee6c6f2ebf5',
+      '65cb52a735996806a97e')
+    promise.then(response => {
+      console.log(response.documents);
+      setData(response.documents); // Set the data state variable
+    }).catch(error => {
+      console.log(error);
+    });
+  }, [data]);
+
   useEffect(() => {
     dispatch(updateTotal())
-  }, [products, dispatch]);
-
+  }, [data, dispatch]);
 
   return (
     <div>
@@ -20,7 +35,7 @@ function BasketProduct() {
       {ammount >= 1 ? (<>
         <div>
           {/* Map through the products array and render a Product component for each item */}
-          {products.map((item, i) => <Product
+          {data.map((item, i) => <Product
             key={item.id}
             name={item.name}
             price={item.price}
@@ -35,7 +50,10 @@ function BasketProduct() {
               <p className='text-2xl font-medium'> ${total} </p>
             </div>
             {/* Checkout button */}
-            <button onClick={()=> { navigate('/Redux/Checkout')}} className="cursor-pointer group relative flex gap-1.5 px-8 py-4 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md">
+            {/* <button onClick={()=> { navigate('/Redux/Checkout')}} className="cursor-pointer group relative flex gap-1.5 px-8 py-4 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md">
+              Checkout
+            </button> */}
+            <button className="cursor-pointer group relative flex gap-1.5 px-8 py-4 bg-black bg-opacity-80 text-[#f1f1f1] rounded-3xl hover:bg-opacity-70 transition font-semibold shadow-md">
               Checkout
             </button>
           </div>
@@ -47,5 +65,4 @@ function BasketProduct() {
     </div>
   )
 }
-
 export default BasketProduct

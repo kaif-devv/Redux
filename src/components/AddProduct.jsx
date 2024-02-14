@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../slices/basketSlice';
 import { useNavigate } from 'react-router-dom';
-
+import { database } from '../appwrite/appwriteConfig';
+import { ID } from 'appwrite';
 function AddProduct() {
     // Get the products from the Redux store
     const products = useSelector((state) => state.basket.products);
     // Get the ID of the last product in the array
-    const newId= products[products.length-1].id;
+    const newId = products[products.length - 1].id;
 
     // Hooks for dispatching actions and navigation
     const dispatch = useDispatch();
@@ -29,21 +30,32 @@ function AddProduct() {
     function handleSubmit(e) {
         try {
             e.preventDefault();
+            const dbPromise = database.createDocument(
+                '65cb5293dee6c6f2ebf5',
+                '65cb52a735996806a97e',
+                ID.unique(),
+                { "name": fname, "price": fprice, "image": fimage, "ammount": fammount, "id": newId + 1 }
+            );
+            dbPromise.then(response => {
+                console.log(response);
+                navigate('/Redux');
+            }).catch(error => {
+                console.log(error);
+            });
             // Dispatch the addProduct action with the form inputs as payload
-            dispatch(addProduct({
-                name: fname,
-                price: fprice,
-                image: fimage,
-                ammount: fammount,
-                id: newId+1
-            }));
+            // dispatch(addProduct({
+            //     name: fname,
+            //     price: fprice,
+            //     image: fimage,
+            //     ammount: fammount,
+            //     id: newId+1
+            // }));
             // Reset the form inputs
             setFname('');
             setFprice('');
             setFimage('');
             setFammount('');
             // Navigate to the '/Redux' route
-            temp(e);
         } catch (error) {
             console.log(error)
         }
@@ -69,7 +81,7 @@ function AddProduct() {
                 </div>
                 <button onSubmit={handleSubmit} type="submit" className="text-gray-200 bg-blue-200 hover:bg-blue-800 hover:text-black focus:ring-2 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-white  dark:focus:ring-black">Add the Product</button>
             </form>
-            
+
         </>
     )
 }

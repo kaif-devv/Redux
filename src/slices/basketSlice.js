@@ -1,5 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { storeData } from "../Data";
+// const [data, setData] = React.useState([]); // State variable to hold the data from the database
+// const promise = database.listDocuments(
+//     '65cb5293dee6c6f2ebf5',
+//     '65cb52a735996806a97e')
+//   promise.then(response => {
+//     console.log(response.documents);
+//     setData(response.documents); // Set the data state variable
+//   }).catch(error => {
+//     console.log(error);
+//   });
+
+
 const initialState = { // initial state for basket
     products: storeData,
     ammount: 0,
@@ -7,6 +19,7 @@ const initialState = { // initial state for basket
     auth: false,
     isLoading: true,
 }
+
 export const basketSlice = createSlice({        // create slice for basket
     name: "basketSlice",
     initialState,
